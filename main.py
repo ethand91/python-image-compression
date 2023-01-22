@@ -11,12 +11,12 @@ def show_file_size(file):
 if __name__ == "__main__":
   ap = argparse.ArgumentParser()
   ap.add_argument("-i", "--image", required = True, help = "Path to input file")
-  ap.add_argument("-c", "--compression", required = True, help = "Compression level")
+  ap.add_argument("-c", "--compression", required = True, help = "Compression level", type=int)
   args = vars(ap.parse_args())
 
   image = cv2.imread(args["image"])
 
-  cv2.imwrite("compressed_image.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, 50])
+  cv2.imwrite("compressed_image.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, args["compression"]])
 
   print("Image Compressed Successfully")
   show_file_size("compressed_image.jpg")
